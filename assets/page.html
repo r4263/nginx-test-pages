@@ -1,0 +1,203 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Request info</title>
+    <style>
+        :root { color-scheme: dark; }
+        * { box-sizing: border-box; }
+        body {
+            font-family: monospace;
+            background: #111;
+            color: #eee;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        h1 { color: #4ade80; overflow-wrap: anywhere; }
+        h2 {
+            color: #fbbf24;
+            margin-top: 32px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        td {
+            border: 1px solid #444;
+            padding: 9px;
+            overflow-wrap: anywhere;
+            vertical-align: top;
+        }
+        td:first-child { color: #60a5fa; width: 32%; }
+        td:last-child { color: #e5e7eb; white-space: pre-wrap; }
+        .note { color: #9ca3af; font-size: 12px; }
+        .empty { color: #737373; }
+    </style>
+</head>
+<body>
+    <h1>Request informations</h1>
+    <p class="note">Request diagnostics / Reverse proxy / Connection / TLS / Upstream</p>
+
+    <h2>Request</h2>
+    <table>
+        <tr><td>Request</td><td>{{NGINX_REQUEST}}</td></tr>
+        <tr><td>Method</td><td>{{NGINX_REQUEST_METHOD}}</td></tr>
+        <tr><td>URI (original)</td><td>{{NGINX_REQUEST_URI}}</td></tr>
+        <tr><td>URI (normalized)</td><td>{{NGINX_URI}}</td></tr>
+        <tr><td>Arguments</td><td>{{NGINX_ARGS}}</td></tr>
+        <tr><td>Query string</td><td>{{NGINX_QUERY_STRING}}</td></tr>
+        <tr><td>Protocol</td><td>{{NGINX_SERVER_PROTOCOL}}</td></tr>
+        <tr><td>Scheme</td><td>{{NGINX_SCHEME}}</td></tr>
+        <tr><td>Request length</td><td>{{NGINX_REQUEST_LENGTH}} bytes</td></tr>
+        <tr><td>Request body length</td><td>{{NGINX_CONTENT_LENGTH}}</td></tr>
+        <tr><td>Request content type</td><td>{{NGINX_HTTP_CONTENT_TYPE}}</td></tr>
+        <tr><td>Request encoding</td><td>{{NGINX_HTTP_CONTENT_ENCODING}}</td></tr>
+        <tr><td>Transfer encoding</td><td>{{NGINX_HTTP_TRANSFER_ENCODING}}</td></tr>
+        <tr><td>Accept</td><td>{{NGINX_HTTP_ACCEPT}}</td></tr>
+        <tr><td>Accept encoding</td><td>{{NGINX_HTTP_ACCEPT_ENCODING}}</td></tr>
+        <tr><td>Accept language</td><td>{{NGINX_HTTP_ACCEPT_LANGUAGE}}</td></tr>
+        <tr><td>Authorization present</td><td>{{NGINX_HTTP_AUTHORIZATION}}</td></tr>
+        <tr><td>Cookie</td><td>{{NGINX_HTTP_COOKIE}}</td></tr>
+        <tr><td>Referer</td><td>{{NGINX_HTTP_REFERER}}</td></tr>
+        <tr><td>User-Agent</td><td>{{NGINX_HTTP_USER_AGENT}}</td></tr>
+        <tr><td>Origin</td><td>{{NGINX_HTTP_ORIGIN}}</td></tr>
+        <tr><td>Connection header</td><td>{{NGINX_HTTP_CONNECTION}}</td></tr>
+        <tr><td>Keep-Alive header</td><td>{{NGINX_HTTP_KEEP_ALIVE}}</td></tr>
+        <tr><td>Upgrade header</td><td>{{NGINX_HTTP_UPGRADE}}</td></tr>
+        <tr><td>Expect header</td><td>{{NGINX_HTTP_EXPECT}}</td></tr>
+        <tr><td>Host header</td><td>{{NGINX_HTTP_HOST}}</td></tr>
+        <tr><td>TE header</td><td>{{NGINX_HTTP_TE}}</td></tr>
+        <tr><td>Via header</td><td>{{NGINX_HTTP_VIA}}</td></tr>
+    </table>
+
+    <h2>Client and Connection</h2>
+    <table>
+        <tr><td>Remote address</td><td>{{NGINX_REMOTE_ADDR}}</td></tr>
+        <tr><td>Remote port</td><td>{{NGINX_REMOTE_PORT}}</td></tr>
+        <tr><td>Remote user</td><td>{{NGINX_REMOTE_USER}}</td></tr>
+        <tr><td>Server address</td><td>{{NGINX_SERVER_ADDR}}</td></tr>
+        <tr><td>Server port</td><td>{{NGINX_SERVER_PORT}}</td></tr>
+        <tr><td>Server name</td><td>{{NGINX_SERVER_NAME}}</td></tr>
+        <tr><td>Host (Nginx)</td><td>{{NGINX_HOST}}</td></tr>
+        <tr><td>Hostname</td><td>{{NGINX_HOSTNAME}}</td></tr>
+        <tr><td>Connection number</td><td>{{NGINX_CONNECTION}}</td></tr>
+        <tr><td>Connection requests</td><td>{{NGINX_CONNECTION_REQUESTS}}</td></tr>
+        <tr><td>Binary remote address</td><td>{{NGINX_BINARY_REMOTE_ADDR}}</td></tr>
+        <tr><td>Real IP module address</td><td>{{NGINX_REALIP_REMOTE_ADDR}}</td></tr>
+        <tr><td>Real IP module port</td><td>{{NGINX_REALIP_REMOTE_PORT}}</td></tr>
+    </table>
+
+    <h2>Reverse Proxy: Forwarded Client Information</h2>
+    <table>
+        <tr><td>X-Forwarded-For</td><td>{{NGINX_HTTP_X_FORWARDED_FOR}}</td></tr>
+        <tr><td>X-Real-IP</td><td>{{NGINX_HTTP_X_REAL_IP}}</td></tr>
+        <tr><td>Forwarded (standard)</td><td>{{NGINX_HTTP_FORWARDED}}</td></tr>
+        <tr><td>X-Forwarded-Host</td><td>{{NGINX_HTTP_X_FORWARDED_HOST}}</td></tr>
+        <tr><td>X-Forwarded-Proto</td><td>{{NGINX_HTTP_X_FORWARDED_PROTO}}</td></tr>
+        <tr><td>X-Forwarded-Port</td><td>{{NGINX_HTTP_X_FORWARDED_PORT}}</td></tr>
+        <tr><td>X-Forwarded-Server</td><td>{{NGINX_HTTP_X_FORWARDED_SERVER}}</td></tr>
+        <tr><td>X-Forwarded-Prefix</td><td>{{NGINX_HTTP_X_FORWARDED_PREFIX}}</td></tr>
+        <tr><td>X-Forwarded-Uri</td><td>{{NGINX_HTTP_X_FORWARDED_URI}}</td></tr>
+        <tr><td>X-Original-URI</td><td>{{NGINX_HTTP_X_ORIGINAL_URI}}</td></tr>
+        <tr><td>X-Original-URL</td><td>{{NGINX_HTTP_X_ORIGINAL_URL}}</td></tr>
+        <tr><td>X-Original-Host</td><td>{{NGINX_HTTP_X_ORIGINAL_HOST}}</td></tr>
+        <tr><td>X-Original-Forwarded-For</td><td>{{NGINX_HTTP_X_ORIGINAL_FORWARDED_FOR}}</td></tr>
+        <tr><td>Proxy-Authorization</td><td>{{NGINX_HTTP_PROXY_AUTHORIZATION}}</td></tr>
+        <tr><td>Proxy connection header</td><td>{{NGINX_HTTP_PROXY_CONNECTION}}</td></tr>
+    </table>
+
+    <h2>CDN and Load Balancer Headers</h2>
+    <table>
+        <tr><td>CF-Connecting-IP</td><td>{{NGINX_HTTP_CF_CONNECTING_IP}}</td></tr>
+        <tr><td>CF-Connecting-IPv6</td><td>{{NGINX_HTTP_CF_CONNECTING_IPV6}}</td></tr>
+        <tr><td>CF-Ray</td><td>{{NGINX_HTTP_CF_RAY}}</td></tr>
+        <tr><td>CF-IPCountry</td><td>{{NGINX_HTTP_CF_IPCOUNTRY}}</td></tr>
+        <tr><td>True-Client-IP</td><td>{{NGINX_HTTP_TRUE_CLIENT_IP}}</td></tr>
+        <tr><td>X-Client-IP</td><td>{{NGINX_HTTP_X_CLIENT_IP}}</td></tr>
+        <tr><td>X-Cluster-Client-IP</td><td>{{NGINX_HTTP_X_CLUSTER_CLIENT_IP}}</td></tr>
+        <tr><td>X-Envoy-External-Address</td><td>{{NGINX_HTTP_X_ENVOY_EXTERNAL_ADDRESS}}</td></tr>
+        <tr><td>X-Request-ID</td><td>{{NGINX_HTTP_X_REQUEST_ID}}</td></tr>
+        <tr><td>X-Correlation-ID</td><td>{{NGINX_HTTP_X_CORRELATION_ID}}</td></tr>
+        <tr><td>Traceparent</td><td>{{NGINX_HTTP_TRACEPARENT}}</td></tr>
+        <tr><td>Tracestate</td><td>{{NGINX_HTTP_TRACESTATE}}</td></tr>
+        <tr><td>B3 Trace ID</td><td>{{NGINX_HTTP_X_B3_TRACEID}}</td></tr>
+        <tr><td>B3 Span ID</td><td>{{NGINX_HTTP_X_B3_SPANID}}</td></tr>
+        <tr><td>Request start header</td><td>{{NGINX_HTTP_X_REQUEST_START}}</td></tr>
+        <tr><td>Amzn Trace ID</td><td>{{NGINX_HTTP_X_AMZN_TRACE_ID}}</td></tr>
+    </table>
+
+    <h2>Nginx Request and Response Metadata</h2>
+    <table>
+        <tr><td>Nginx request ID</td><td>{{NGINX_REQUEST_ID}}</td></tr>
+        <tr><td>Request completion status</td><td>{{NGINX_REQUEST_COMPLETION}}</td></tr>
+        <tr><td>Document root</td><td>{{NGINX_DOCUMENT_ROOT}}</td></tr>
+        <tr><td>Real file path</td><td>{{NGINX_REQUEST_FILENAME}}</td></tr>
+        <tr><td>Configured limit rate</td><td>{{NGINX_LIMIT_RATE}}</td></tr>
+        <tr><td>Sent content type</td><td>{{NGINX_SENT_HTTP_CONTENT_TYPE}}</td></tr>
+        <tr><td>Sent content length</td><td>{{NGINX_SENT_HTTP_CONTENT_LENGTH}}</td></tr>
+        <tr><td>Sent cache control</td><td>{{NGINX_SENT_HTTP_CACHE_CONTROL}}</td></tr>
+        <tr><td>Sent location</td><td>{{NGINX_SENT_HTTP_LOCATION}}</td></tr>
+        <tr><td>Sent server header</td><td>{{NGINX_SENT_HTTP_SERVER}}</td></tr>
+        <tr><td>Sent request ID</td><td>{{NGINX_SENT_HTTP_X_REQUEST_ID}}</td></tr>
+    </table>
+
+    <h2>TLS / HTTPS</h2>
+    <table>
+        <tr><td>TLS protocol</td><td>{{NGINX_SSL_PROTOCOL}}</td></tr>
+        <tr><td>TLS cipher</td><td>{{NGINX_SSL_CIPHER}}</td></tr>
+        <tr><td>TLS server name (SNI)</td><td>{{NGINX_SSL_SERVER_NAME}}</td></tr>
+        <tr><td>TLS session reused</td><td>{{NGINX_SSL_SESSION_REUSED}}</td></tr>
+        <tr><td>Client certificate verification</td><td>{{NGINX_SSL_CLIENT_VERIFY}}</td></tr>
+        <tr><td>Client certificate subject</td><td>{{NGINX_SSL_CLIENT_S_DN}}</td></tr>
+        <tr><td>Client certificate issuer</td><td>{{NGINX_SSL_CLIENT_I_DN}}</td></tr>
+        <tr><td>Client certificate serial</td><td>{{NGINX_SSL_CLIENT_SERIAL}}</td></tr>
+        <tr><td>Client certificate fingerprint</td><td>{{NGINX_SSL_CLIENT_FINGERPRINT}}</td></tr>
+    </table>
+
+    <h2>Upstream / Reverse Proxy Backend</h2>
+    <table>
+        <tr><td>Upstream address</td><td>{{NGINX_UPSTREAM_ADDR}}</td></tr>
+        <tr><td>Upstream status</td><td>{{NGINX_UPSTREAM_STATUS}}</td></tr>
+        <tr><td>Upstream response time</td><td>{{NGINX_UPSTREAM_RESPONSE_TIME}}</td></tr>
+        <tr><td>Upstream connect time</td><td>{{NGINX_UPSTREAM_CONNECT_TIME}}</td></tr>
+        <tr><td>Upstream header time</td><td>{{NGINX_UPSTREAM_HEADER_TIME}}</td></tr>
+        <tr><td>Upstream response length</td><td>{{NGINX_UPSTREAM_RESPONSE_LENGTH}}</td></tr>
+        <tr><td>Upstream bytes received</td><td>{{NGINX_UPSTREAM_BYTES_RECEIVED}}</td></tr>
+        <tr><td>Upstream bytes sent</td><td>{{NGINX_UPSTREAM_BYTES_SENT}}</td></tr>
+        <tr><td>Upstream HTTP version</td><td>{{NGINX_UPSTREAM_HTTP_VERSION}}</td></tr>
+        <tr><td>Upstream cache status</td><td>{{NGINX_UPSTREAM_CACHE_STATUS}}</td></tr>
+    </table>
+
+    <h2>WebSocket / Fetch / Client Hints</h2>
+    <table>
+        <tr><td>Sec-WebSocket-Key</td><td>{{NGINX_HTTP_SEC_WEBSOCKET_KEY}}</td></tr>
+        <tr><td>Sec-WebSocket-Version</td><td>{{NGINX_HTTP_SEC_WEBSOCKET_VERSION}}</td></tr>
+        <tr><td>Sec-WebSocket-Protocol</td><td>{{NGINX_HTTP_SEC_WEBSOCKET_PROTOCOL}}</td></tr>
+        <tr><td>Sec-WebSocket-Extensions</td><td>{{NGINX_HTTP_SEC_WEBSOCKET_EXTENSIONS}}</td></tr>
+        <tr><td>Sec-Fetch-Site</td><td>{{NGINX_HTTP_SEC_FETCH_SITE}}</td></tr>
+        <tr><td>Sec-Fetch-Mode</td><td>{{NGINX_HTTP_SEC_FETCH_MODE}}</td></tr>
+        <tr><td>Sec-Fetch-Dest</td><td>{{NGINX_HTTP_SEC_FETCH_DEST}}</td></tr>
+        <tr><td>Sec-Fetch-User</td><td>{{NGINX_HTTP_SEC_FETCH_USER}}</td></tr>
+        <tr><td>Sec-CH-UA</td><td>{{NGINX_HTTP_SEC_CH_UA}}</td></tr>
+        <tr><td>Sec-CH-UA-Platform</td><td>{{NGINX_HTTP_SEC_CH_UA_PLATFORM}}</td></tr>
+        <tr><td>Sec-CH-UA-Mobile</td><td>{{NGINX_HTTP_SEC_CH_UA_MOBILE}}</td></tr>
+        <tr><td>DNT</td><td>{{NGINX_HTTP_DNT}}</td></tr>
+        <tr><td>Priority</td><td>{{NGINX_HTTP_PRIORITY}}</td></tr>
+    </table>
+
+    <h2>Notes</h2>
+    <p class="note">
+        Empty values usually mean that a header was not supplied, TLS was not used,
+        or the relevant upstream/module is not available for this request.
+        Upstream variables are populated only when an upstream is involved.
+        This page displays selected variables, not every possible incoming header.
+    </p>
+</body>
+</html>
