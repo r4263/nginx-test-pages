@@ -1,2 +1,4 @@
 # nginx-test-pages
-HTTP and HTTPS test pages with auto self-signed certificate generation in runtime. Intended for testing firewall NATs and reverse proxies.
+A simple tool intended for testing firewall NATs and reverse proxies.
+
+Just run `"docker compose up -d"` to execute the webserver on the configured ports(Default: 80 and 443), and then test your network infraestructure/reverse proxy configurations.
