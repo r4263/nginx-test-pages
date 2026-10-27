@@ -1,7 +1,7 @@
 services:
   nginx:
     image: nginx:alpine
-    container_name: server-test-container
+    container_name: nginx-test-service
     ports:
       - "443:443"
       - "80:80"
